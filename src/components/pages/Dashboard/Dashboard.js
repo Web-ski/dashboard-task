@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { connect } from "react-redux";
+import { addUsersAction } from "../../../api/actions";
 import MainTemplate from "../../templates/mainTemplate.js";
 import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
@@ -10,7 +13,25 @@ const styledHeader = {
   justifyContent: "space-between",
 };
 
-const Dashboard = () => {
+const Dashboard = (props) => {
+  const [usersCollection, setUsersCollection] = useState();
+  const url =
+    "https://my-json-server.typicode.com/karolkproexe/jsonplaceholderdb/data";
+
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((res) => {
+        setUsersCollection(res.data);
+        //props.addCollections(res.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  useEffect(() => {
+    props.addUsers(usersCollection);
+  }, [props, usersCollection]);
+
   return (
     <MainTemplate>
       <Container fluid>
@@ -29,4 +50,10 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addUsers: (data) => dispatch(addUsersAction(data)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Dashboard);

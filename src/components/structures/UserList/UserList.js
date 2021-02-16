@@ -1,8 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 import Table from "react-bootstrap/Table";
 import ListRecord from "../../modules/ListRecord";
 
-const UserList = () => {
+const UserList = ({ users }) => {
   return (
     <Table bordered hover>
       <thead>
@@ -17,10 +18,15 @@ const UserList = () => {
         </tr>
       </thead>
       <tbody>
-        <ListRecord />
+        {console.log(users)}
+        {users && users.map((item) => <ListRecord key={item.id} user={item}/>)}
       </tbody>
     </Table>
   );
 };
 
-export default UserList;
+const mapStateToProps = (state) => {
+  return { users: state.users };
+};
+
+export default connect(mapStateToProps)(UserList);
