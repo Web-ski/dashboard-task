@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
+import { addNewUserAction } from "../../../api/actions";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-const UserForm = ({ user }) => {
+const UserForm = ({ user, addNewUser }) => {
   const [newData, setNewData] = useState({ name: "", email: "" });
   const [checkName, setCheckName] = useState(false);
   const [checkEmail, setCheckEmail] = useState(false);
@@ -15,28 +16,37 @@ const UserForm = ({ user }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const url = "https://jsonplaceholder.typicode.com/";
-
-    let order;
+    const url = "https://jsonplaceholder.typicode.com/users";
 
     if (newData.name.length === 0) {
       setCheckName(true);
     } else if (newData.email.length === 0) {
       setCheckEmail(true);
     } else {
+      setCheckName(false);
+      setCheckEmail(false);
       console.log("Cool!");
+
+      let order;
+      order = {
+        id: 99,
+        name: newData.name,
+        email: newData.email,
+        username: "",
+        address: { city: "" },
+      };
+
+      addNewUser(order);
+
+      axios
+        .post(url, order)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
-
-    // axios
-    //   .post(url, order)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
-
-    //console.log(order);
   };
 
   const changeHandler = (event) => {
@@ -80,7 +90,7 @@ const UserForm = ({ user }) => {
             placeholder={user ? user.email : "Email"}
             onChange={changeHandler}
           />
-          {checkName && (
+          {checkEmail && (
             <Form.Text style={{ color: "red" }}>
               Please fill in the field.
             </Form.Text>
@@ -99,4 +109,10 @@ const UserForm = ({ user }) => {
   );
 };
 
-export default UserForm;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addNewUser: (data) => dispatch(addNewUserAction(data)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(UserForm);

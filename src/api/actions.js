@@ -5,4 +5,11 @@ const addUsersAction = (data) => ({
   },
 });
 
-export { addUsersAction };
+const addNewUserAction = (data) => ({
+  type: "NEW_USER",
+  payload: {
+    newUser: data,
+  },
+});
+
+export { addUsersAction, addNewUserAction };

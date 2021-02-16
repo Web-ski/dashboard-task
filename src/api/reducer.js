@@ -10,6 +10,12 @@ const usersReducer = (state = initialState, { payload, type }) => {
         users: payload.users,
       };
     }
+    case "NEW_USER": {
+      return {
+        ...state,
+        users: [...state.users, payload.newUser],
+      };
+    }
     default:
       return state;
   }
