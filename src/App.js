@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from "./components/pages/Dashboard";
 import User from "./components/pages/User";
 
-
 const App = () => {
   return (
     <div className="App">
