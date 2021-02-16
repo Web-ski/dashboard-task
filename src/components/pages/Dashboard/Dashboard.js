@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { connect } from "react-redux";
 import { addUsersAction } from "../../../api/actions";
@@ -23,7 +24,6 @@ const Dashboard = (props) => {
       .get(url)
       .then((res) => {
         setUsersCollection(res.data);
-        //props.addCollections(res.data);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -39,7 +39,7 @@ const Dashboard = (props) => {
         <Card>
           <Card.Header style={styledHeader}>
             <Card.Title>User list</Card.Title>{" "}
-            <Button variant="primary">Add new</Button>
+            <Button variant="primary" as={NavLink} to="/user/new">Add new</Button>
           </Card.Header>
           <Card.Body>
             <UserList />

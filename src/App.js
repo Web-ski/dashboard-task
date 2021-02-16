@@ -9,7 +9,10 @@ const App = () => {
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/:id">
+          <Route path="/user/:id">
+            <User />
+          </Route>
+          <Route path="/user/new">
             <User />
           </Route>
           <Route exact path="/">

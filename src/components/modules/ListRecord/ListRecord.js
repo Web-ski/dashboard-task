@@ -15,7 +15,7 @@ const ListRecord = ({user}) => {
       <td>{user.username}</td>
       <td>{user.email}</td>
       <td>{addCity(user.address)}</td>
-      <td><Button as={NavLink} to={`${user.id}`} variant="warning">edit</Button></td>
+      <td><Button as={NavLink} to={`/user/${user.id}`} variant="warning">edit</Button></td>
       <td><Button variant="danger">delete</Button></td>
     </tr>
   );
