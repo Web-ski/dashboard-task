@@ -18,7 +18,6 @@ const UserList = ({ users }) => {
         </tr>
       </thead>
       <tbody>
-        {console.log(users)}
         {users && users.map((item) => <ListRecord key={item.id} user={item}/>)}
       </tbody>
     </Table>
