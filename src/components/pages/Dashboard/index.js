@@ -1,1 +1,1 @@
-export { default } from "./Dasboard.js";
+export { default } from "./Dashboard.js";
