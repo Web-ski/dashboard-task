@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
+import { connect } from "react-redux";
+import { addUsersAction } from "./api/actions";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from "./components/pages/Dashboard";
 import User from "./components/pages/User";
 
-const App = () => {
+const App = (props) => {
+  const [usersCollection, setUsersCollection] = useState();
+  const url =
+    "https://my-json-server.typicode.com/karolkproexe/jsonplaceholderdb/data";
+
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((res) => {
+        setUsersCollection(res.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  useEffect(() => {
+    props.addUsers(usersCollection);
+  }, [props, usersCollection]);
+
   return (
     <div className="App">
       <Router>
@@ -24,4 +44,10 @@ const App = () => {
   );
 };
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addUsers: (data) => dispatch(addUsersAction(data)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(App);

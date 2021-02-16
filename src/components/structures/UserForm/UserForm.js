@@ -7,12 +7,12 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { newId } from "../../../accessors/accessors";
 
-const UserForm = ({ user, addNewUser }) => {
+const UserForm = ({ user, users, addNewUser }) => {
   const [newData, setNewData] = useState({ name: "", email: "" });
   const [checkName, setCheckName] = useState(false);
   const [checkEmail, setCheckEmail] = useState(false);
-  console.log(newData);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,11 +25,10 @@ const UserForm = ({ user, addNewUser }) => {
     } else {
       setCheckName(false);
       setCheckEmail(false);
-      console.log("Cool!");
 
       let order;
       order = {
-        id: 99,
+        id: newId(users),
         name: newData.name,
         email: newData.email,
         username: "",
@@ -109,10 +108,16 @@ const UserForm = ({ user, addNewUser }) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    users: state.users,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     addNewUser: (data) => dispatch(addNewUserAction(data)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(UserForm);
+export default connect(mapStateToProps, mapDispatchToProps)(UserForm);
