@@ -19,4 +19,16 @@ const removeUserAction = (data) => ({
   },
 });
 
-export { addUsersAction, addNewUserAction, removeUserAction };
+const changeUserDataAction = (data) => ({
+  type: "UPLOAD_USER",
+  payload: {
+    userData: data,
+  },
+});
+
+export {
+  addUsersAction,
+  addNewUserAction,
+  removeUserAction,
+  changeUserDataAction,
+};

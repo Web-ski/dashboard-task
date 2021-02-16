@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Redirect, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import { addNewUserAction } from "../../../api/actions";
+import { addNewUserAction, changeUserDataAction } from "../../../api/actions";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
@@ -14,7 +14,7 @@ const styledButtonsGroup = {
   justifyContent: "center",
 };
 
-const UserForm = ({ user, users, addNewUser }) => {
+const UserForm = ({ user, users, addNewUser, changeUserData }) => {
   const [redirect, setRedirect] = useState(false);
   const [newData, setNewData] = useState({ name: "", email: "" });
   const [checkName, setCheckName] = useState(false);
@@ -33,15 +33,23 @@ const UserForm = ({ user, users, addNewUser }) => {
       setCheckEmail(false);
 
       let order;
-      order = {
-        id: newId(users),
-        name: newData.name,
-        email: newData.email,
-        username: "",
-        address: { city: "" },
-      };
+      user
+        ? (order = {
+            id: user.id,
+            name: newData.name,
+            email: newData.email,
+            username: user.username,
+            address: user.address,
+          })
+        : (order = {
+            id: newId(users),
+            name: newData.name,
+            email: newData.email,
+            username: "",
+            address: { city: "" },
+          });
 
-      addNewUser(order);
+      user ? changeUserData(order) : addNewUser(order);
 
       axios
         .post(url, order)
@@ -134,6 +142,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addNewUser: (data) => dispatch(addNewUserAction(data)),
+    changeUserData: (data) => dispatch(changeUserDataAction(data)),
   };
 };
 
