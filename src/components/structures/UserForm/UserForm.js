@@ -8,42 +8,42 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 const UserForm = ({ user }) => {
-  console.log(user);
-  const [newName, setName] = useState();
-  const [newEmail, setEmail] = useState();
+  const [newData, setNewData] = useState({ name: "", email: "" });
+  const [checkName, setCheckName] = useState(false);
+  const [checkEmail, setCheckEmail] = useState(false);
+  console.log(newData);
 
   const handleSubmit = (event) => {
-    //event.preventDefault();
+    event.preventDefault();
     const url = "https://jsonplaceholder.typicode.com/";
 
     let order;
 
-    if (user !== undefined) {
-      order = {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        username: user.username,
-        address: user.address,
-      }
+    if (newData.name.length === 0) {
+      setCheckName(true);
+    } else if (newData.email.length === 0) {
+      setCheckEmail(true);
     } else {
-      order = {
-        id: 99,
-        name: newName,
-        email: newEmail,
-        username: "New",
-        address: {city: "Sopot"},
-      }
+      console.log("Cool!");
     }
 
-    axios
-      .post(url, order)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    // axios
+    //   .post(url, order)
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
+
+    //console.log(order);
+  };
+
+  const changeHandler = (event) => {
+    event.target.name === "name" &&
+      setNewData({ name: event.target.value, email: newData.email });
+    event.target.name === "email" &&
+      setNewData({ name: newData.name, email: event.target.value });
   };
 
   return (
@@ -54,11 +54,19 @@ const UserForm = ({ user }) => {
         </Form.Label>
         <Col sm="10">
           <Form.Control
+            name="name"
             type="text"
             placeholder={user ? user.name : "Name"}
-            onChange={(e) => setName(e.target.value)}
+            onChange={changeHandler}
+            minLength="3"
+            maxLength="30"
           />
-          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+          <Form.Text muted>Your name must be 3-30 characters long.</Form.Text>
+          {checkName && (
+            <Form.Text style={{ color: "red" }}>
+              Please fill in the field.
+            </Form.Text>
+          )}
         </Col>
       </Form.Group>
       <Form.Group as={Row} controlId="formEmail">
@@ -67,11 +75,16 @@ const UserForm = ({ user }) => {
         </Form.Label>
         <Col sm="10">
           <Form.Control
+            name="email"
             type="email"
             placeholder={user ? user.email : "Email"}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={changeHandler}
           />
-          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+          {checkName && (
+            <Form.Text style={{ color: "red" }}>
+              Please fill in the field.
+            </Form.Text>
+          )}{" "}
         </Col>
       </Form.Group>
       <Form.Group>
