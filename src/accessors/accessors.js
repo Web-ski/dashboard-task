@@ -1,14 +1,12 @@
 export const newId = (data) => {
   let idArr = [];
   let addId;
-  data.map((item) => idArr.push(item.id));
+  data.map((item) => idArr.push(parseInt(item.id)));
 
-  const findNumber = (number) => {
-    idArr.find((element) => element === idArr.length + number)
-      ? findNumber(number++)
-      : (addId = idArr.length + number);
+  const findNumber = () => {
+    addId = Math.max(...idArr) + 1;
   };
 
-  findNumber(1);
+  findNumber();
   return addId;
 };

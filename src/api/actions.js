@@ -12,4 +12,11 @@ const addNewUserAction = (data) => ({
   },
 });
 
-export { addUsersAction, addNewUserAction };
+const removeUserAction = (data) => ({
+  type: "REMOVE_USER",
+  payload: {
+    idUser: data,
+  },
+});
+
+export { addUsersAction, addNewUserAction, removeUserAction };
