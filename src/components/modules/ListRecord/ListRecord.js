@@ -1,9 +1,11 @@
 /* eslint-disable no-undef */
 import React, { useState } from "react";
+import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { removeUserAction } from "../../../api/actions";
 import Button from "react-bootstrap/Button";
+import { url } from "../../../constans";
 
 const ListRecord = ({ user, removeUser }) => {
   const [popoverOpen, setPopoverOpen] = useState(false);
@@ -47,6 +49,20 @@ const ListRecord = ({ user, removeUser }) => {
     return city;
   };
 
+  const handleRemove = () => {
+
+    axios
+    .delete(`${url}/${user.id}`)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+    removeUser(user.id)
+  }
+
   return (
     <tr>
       <td>{user.id}</td>
@@ -68,7 +84,7 @@ const ListRecord = ({ user, removeUser }) => {
             <h6>Are you sure you want to delete the user?</h6>
           </div>
           <div style={styledButtonsPopover}>
-            <Button variant="danger" onClick={() => removeUser(user.id)}>
+            <Button variant="danger" onClick={() => handleRemove()}>
               Yes. Delete
             </Button>
             <Button variant="dark" onClick={toggle}>

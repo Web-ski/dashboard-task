@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { newId } from "../../../accessors/accessors";
+import { url } from "../../../constans";
 
 const styledButtonsGroup = {
   display: "flex",
@@ -22,7 +23,6 @@ const UserForm = ({ user, users, addNewUser, changeUserData }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const url = "https://jsonplaceholder.typicode.com/users";
 
     if (newData.name.length === 0) {
       setCheckName(true);
@@ -51,16 +51,30 @@ const UserForm = ({ user, users, addNewUser, changeUserData }) => {
 
       user ? changeUserData(order) : addNewUser(order);
 
-      axios
-        .post(url, order)
-        .then((res) => {
-          setRedirect(true);
-          console.log(res);
-        })
-        .catch((error) => {
-          console.error(error);
-          alert("Something has gone wrong!");
-        });
+      user
+        ? axios
+            .put(`${url}/${user.id}`, {
+              name: newData.name,
+              email: newData.email,
+            })
+            .then((res) => {
+              setRedirect(true);
+              console.log(res);
+            })
+            .catch((error) => {
+              console.error(error);
+              alert("Something has gone wrong!");
+            })
+        : axios
+            .post(url, order)
+            .then((res) => {
+              setRedirect(true);
+              console.log(res);
+            })
+            .catch((error) => {
+              console.error(error);
+              alert("Something has gone wrong!");
+            });
     }
   };
 

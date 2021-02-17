@@ -13,7 +13,7 @@ const User = ({ users }) => {
   useEffect(() => {
     let choosen = users.filter((item) => item.id.toString() === id && item);
     setChoosenUser(choosen[0]);
-  }, [users]);
+  }, [users, id]);
 
   return (
     <MainTemplate>
