@@ -13,9 +13,9 @@ const styledHeader = {
 
 const Dashboard = () => (
   <MainTemplate>
-    <Container fluid>
+    <Container >
       <h1>Dashboard</h1>
-      <Card>
+      <Card style={{ minWidth: "min-content" }}>
         <Card.Header style={styledHeader}>
           <Card.Title style={{marginBottom: "0", lineHeight: "2"}}>User list</Card.Title>{" "}
           <Button variant="primary" as={NavLink} to="/user/new">

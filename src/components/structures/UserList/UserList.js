@@ -18,8 +18,13 @@ const UserList = ({ users }) => {
         </tr>
       </thead>
       <tbody>
-        {users && users.map((item) => <ListRecord key={item.id} user={item}/>)}
+        {users && users.map((item) => <ListRecord key={item.id} user={item} />)}
       </tbody>
+      {(!users || users.length === 0) && (
+        <caption style={{ textAlign: "center" }}>
+          The list of users is empty. Add new user.
+        </caption>
+      )}
     </Table>
   );
 };
