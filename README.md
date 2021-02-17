@@ -1,6 +1,8 @@
 # Dashboard task
 
-The task was to create an administration panel to manage users, using React, Redux, API. The solution also uses Bootstrap for React.
+The recuitment task was to create an administration panel to manage users, using **React**, **Redux**, **API**. The solution also uses **Bootstrap for React**.
+
+You can see the project on the [GitHub Pages](https://web-ski.github.io/dashboard-task/).
 
 ---
 
