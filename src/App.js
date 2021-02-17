@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { connect } from "react-redux";
 import { addUsersAction } from "./api/actions";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Dashboard from "./components/pages/Dashboard";
 import User from "./components/pages/User";
 
@@ -27,7 +27,7 @@ const App = (props) => {
 
   return (
     <div className="App">
-      <Router>
+      <BrowserRouter basename="/dashboard-task"/>
         <Switch>
           <Route path="/user/:id">
             <User />
