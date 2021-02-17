@@ -7,14 +7,15 @@ const UserList = ({ users }) => {
   return (
     <Table bordered hover>
       <thead>
-        <tr>
-          <th>id</th>
-          <th>Name</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>City</th>
-          <th>Edit</th>
-          <th>Delete</th>
+        <tr >
+          <th style={{verticalAlign: "middle"}}>id</th>
+          <th style={{verticalAlign: "middle"}}>Name</th>
+          <th style={{verticalAlign: "middle"}}>Username
+          </th>
+          <th style={{verticalAlign: "middle"}}>Email</th>
+          <th style={{verticalAlign: "middle"}}>City</th>
+          <th style={{verticalAlign: "middle"}}>Edit</th>
+          <th style={{verticalAlign: "middle"}}>Delete</th>
         </tr>
       </thead>
       <tbody>

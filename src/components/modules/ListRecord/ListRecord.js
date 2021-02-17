@@ -84,11 +84,11 @@ const ListRecord = ({ user, removeUser }) => {
             <h6>Are you sure you want to delete the user?</h6>
           </div>
           <div style={styledButtonsPopover}>
+          <Button variant="dark" onClick={toggle}>
+              No! Exit
+            </Button>
             <Button variant="danger" onClick={() => handleRemove()}>
               Yes. Delete
-            </Button>
-            <Button variant="dark" onClick={toggle}>
-              No! Exit
             </Button>
           </div>
         </section>
