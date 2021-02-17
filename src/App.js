@@ -27,7 +27,7 @@ const App = (props) => {
 
   return (
     <div className="App">
-      <BrowserRouter basename="/dashboard-task"/>
+      <BrowserRouter basename="/dashboard-task">
         <Switch>
           <Route path="/user/:id">
             <User />
@@ -39,7 +39,7 @@ const App = (props) => {
             <Dashboard />
           </Route>
         </Switch>
-      </Router>
+      </BrowserRouter>
     </div>
   );
 };
