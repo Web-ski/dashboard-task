@@ -17,7 +17,7 @@ const Dashboard = () => (
       <h1>Dashboard</h1>
       <Card>
         <Card.Header style={styledHeader}>
-          <Card.Title>User list</Card.Title>{" "}
+          <Card.Title style={{marginBottom: "0", lineHeight: "2"}}>User list</Card.Title>{" "}
           <Button variant="primary" as={NavLink} to="/user/new">
             Add new
           </Button>

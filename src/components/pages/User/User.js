@@ -21,7 +21,7 @@ const User = ({ users }) => {
         <h1>Dashboard</h1>
         <Card>
           <Card.Header>
-            <Card.Title>Form</Card.Title>
+            <Card.Title style={{marginBottom: "0", lineHeight: "2"}}>Form</Card.Title>
           </Card.Header>
           <Card.Body>
             <UserForm user={choosenUser} />

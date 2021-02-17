@@ -121,7 +121,7 @@ const UserForm = ({ user, users, addNewUser, changeUserData }) => {
           <Form.Group style={styledButtonsGroup}>
             <NavLink to="/" style={{ margin: "10px" }}>
               {" "}
-              <Button variant="outline-secondary">Cancel</Button>
+              <Button variant="outline-danger">Cancel</Button>
             </NavLink>
             <Button variant="success" type="submit" style={{ margin: "10px" }}>
               Submit
